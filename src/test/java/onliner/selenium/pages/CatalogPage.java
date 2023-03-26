@@ -5,16 +5,16 @@ import onliner.selenium.enums.TopMenuCatalogItems;
 import onliner.selenium.enums.TopMenuItems;
 import onliner.selenium.utils.WebDriverRunner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class CatalogPage extends BasePage{
 
-    private By catalogTitle = By.xpath("//a[@class='b-tile-main']/h3/span");
-    private By catalogSection = By.xpath("//a[@class='b-tile-section']");
+    private By catalogTitle = By.xpath("//div[@class='catalog-navigation__title']");
+    private By catalogSection = By.xpath("//ul[contains(@class,'catalog-navigation-classifier')]");
 
-    private By dropdownItemTitle = By.xpath("//span[contains(@class,'catalog-navigation-list__dropdown-item')]");
+    private By dropdownItemTitle = By.xpath("//div[@class='catalog-navigation-list__aside-item catalog-navigation-list__aside-item_active']//a[@class='catalog-navigation-list__dropdown-item']//span[@class='catalog-navigation-list__dropdown-title']");
 
-    private By dropdownItemDescription = By.xpath("//span[@class='catalog-navigation-list__dropdown-description']");
-
+    private By dropdownItemDescription = By.xpath("//div[@class='catalog-navigation-list__aside-item catalog-navigation-list__aside-item_active']//a[@class='catalog-navigation-list__dropdown-item']");
     public boolean isNewsItemPresent() {
         return topMenu.isItemExists(TopMenuItems.CATALOG.getValue());
     }
@@ -51,15 +51,11 @@ public class CatalogPage extends BasePage{
         return WebDriverRunner.getDriver().findElement(catalogSection).getText();
     }
 
-    public String getDropdownItemTitle() {
-        return WebDriverRunner.getDriver().findElements(dropdownItemTitle)
-                .get(0)
-                .getText();
+    public WebElement getDropdownItemTitle() {
+        return WebDriverRunner.getDriver().findElement(dropdownItemTitle);
     }
 
-    public String getDropdownItemDescription() {
-        return WebDriverRunner.getDriver().findElements(dropdownItemDescription)
-                .get(0)
-                .getText();
+    public WebElement getDropdownItemDescription() {
+        return WebDriverRunner.getDriver().findElement(dropdownItemDescription);
     }
 }

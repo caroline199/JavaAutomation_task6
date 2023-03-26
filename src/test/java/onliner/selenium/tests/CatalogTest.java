@@ -1,13 +1,13 @@
 package onliner.selenium.tests;
-import onliner.selenium.elements.CatalogList;
 import onliner.selenium.enums.KsisItems;
 import onliner.selenium.enums.TopMenuCatalogItems;
-import onliner.selenium.enums.TopMenuItems;
 import onliner.selenium.pages.CatalogPage;
-import onliner.selenium.pages.NewsPage;
-import onliner.selenium.utils.WebDriverRunner;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
+
+import static java.lang.Thread.sleep;
 
 public class CatalogTest extends MainPageTest {
     public CatalogPage catalogPage;
@@ -25,10 +25,8 @@ public class CatalogTest extends MainPageTest {
     @Test
     public void testOpenCatalog() {
         catalogPage.openPage();
-        Assertions.assertAll(
-                () -> Assertions.assertFalse(catalogPage.getCatalogTitle().isEmpty()),
-                () -> Assertions.assertFalse(catalogPage.getCatalogSection().isEmpty())
-        );
+        Assertions.assertFalse(catalogPage.getCatalogTitle().isEmpty());
+        Assertions.assertFalse(catalogPage.getCatalogSection().isEmpty());
     }
 
     @Test
@@ -56,17 +54,13 @@ public class CatalogTest extends MainPageTest {
     }
 
     @Test
-    public void testOpenAccessories(){
+    public void testOpenAccessories() {
         catalogPage.openPage();
         catalogPage.openKsis();
         Assertions.assertTrue(catalogPage.isCatalogItemsListPresent(KsisItems.ACCESSORIES));
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
         catalogPage.openCatalogItemsListDropdown();
-        Assertions.assertEquals(catalogPage.getDropdownItemTitle(), "sdf");
-//
-//        Assertions.assertAll(
-//                () -> Assertions.assertFalse(catalogPage.getDropdownItemTitle().isEmpty()),
-//                () -> Assertions.assertFalse(catalogPage.getDropdownItemDescription().isEmpty())
-//        );
+        Assertions.assertTrue(catalogPage.getDropdownItemTitle().isDisplayed());
+        Assertions.assertTrue(catalogPage.getDropdownItemDescription().isDisplayed());
     }
 }

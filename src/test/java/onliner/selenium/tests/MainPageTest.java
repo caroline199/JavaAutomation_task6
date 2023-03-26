@@ -5,6 +5,8 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainPageTest {
 
     public static WebDriver driver;
@@ -16,6 +18,7 @@ public class MainPageTest {
         System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver_mac64/chromedriver");
         driver = WebDriverRunner.getDriver();
         driver.get("https://onliner.by");
+//        driver.manage().window().maximize();
     }
 
     @AfterAll
