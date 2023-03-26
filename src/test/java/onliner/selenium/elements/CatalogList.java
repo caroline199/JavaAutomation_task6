@@ -5,7 +5,7 @@ import onliner.selenium.utils.WebDriverRunner;
 import org.openqa.selenium.By;
 
 public class CatalogList {
-    private static final String ITEM_PATTERN = "//span[contains(@class,'catalog-navigation-list') and contains(text(), '%s')]";
+    private static final String ITEM_PATTERN = "//div[contains(@class,'catalog-navigation-list__aside-list') and contains(normalize-space(), '%s')]";
 
     public boolean isItemExists(String name) {
         return WebDriverRunner.getDriver().findElement(By.xpath(String.format(ITEM_PATTERN, name))).isDisplayed();
